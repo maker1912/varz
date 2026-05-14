@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 
 //~~~~~~~~~~~~< GLOBAL SETTINGS >~~~~~~~~~~~~\\
 
-global.owner = ['6282113821188'] // ['628','628'] 2 owner atau lebih
+global.owner = ['628561411054'] // ['628','628'] 2 owner atau lebih
 global.author = 'Maker1912'
 global.botname = 'Varz Bot'
 global.packname = 'Bot WhatsApp'
@@ -77,7 +77,7 @@ global.APIs = {
 	neosantara: 'https://api.neosantara.xyz/v1',
 }
 global.APIKeys = {
-	'https://api.naze.biz.id': '',
+	'https://api.naze.biz.id': 'nz-e89925bb0c',
 	'https://api.neosantara.xyz/v1': 'API_KEY_NEOSANTARA_AI',
 }
 
