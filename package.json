@@ -1,5 +1,5 @@
 {
-  "name": "hitori",
+  "name": "varz",
   "version": "1.1.8",
   "description": "Bot WhatsApp Using Lib Baileys Multi Device",
   "keywords": [
@@ -8,11 +8,11 @@
     "bot-wa",
     "multi-device"
   ],
-  "author": "Nazedev",
+  "author": "Maker1912",
   "license": "MIT",
-  "homepage": "https://github.com/nazedev/hitori#readme",
+  "homepage": "https://github.com/maker1912/varz",
   "bugs": {
-    "url": "https://github.com/nazedev/hitori/issues"
+    "url": "https://github.com/maker1912/varz/issues"
   },
   "repository": {
     "type": "git",
