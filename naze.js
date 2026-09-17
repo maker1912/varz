@@ -1140,6 +1140,44 @@ const naze = async (naze, m, msg, store) => {
 				});
 			}
 			break
+				case 'mcping': case 'mcstatus': {
+    let address = text || '127.0.0.1:19132';
+
+    let host = address;
+    let port = 19132;
+
+    if (address.includes(':')) {
+        let parts = address.split(':');
+        host = parts[0];
+        port = parseInt(parts[1]) || 19132;
+    }
+
+    await m.reply('🔄 Mengecek server Minecraft...');
+
+    let result = await mcPing(host, port);
+
+    if (!result.online) {
+        return m.reply(
+            `🔴 *SERVER OFFLINE*\n\n` +
+            `🌐 Address : ${host}\n` +
+            `🔌 Port : ${port}`
+        );
+    }
+
+    m.reply(
+        `╭──「 *MCPE SERVER STATUS* 」\n` +
+        `│ 🟢 Status : ONLINE\n` +
+        `│\n` +
+        `│ 🌐 Host : ${host}\n` +
+        `│ 🔌 Port : ${port}\n` +
+        `│ 📶 Ping : ${result.ping}ms\n` +
+        `│ 👥 Players : ${result.players}/${result.maxPlayers}\n` +
+        `│ 🎮 Version : ${result.version}\n` +
+        `│ 📝 MOTD : ${result.motd}\n` +
+        `╰────────────`
+    );
+}
+break
 			case 'getcase': {
 				if (!isCreator) return m.reply(global.mess.owner)
 				if (!text) return m.reply('Masukkan Nama Casenya!')
