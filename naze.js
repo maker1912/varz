@@ -2489,14 +2489,20 @@ case 'swgc': case 'statusgrup': case 'groupstatus': {
     if (!m.isGroup) return m.reply(global.mess.group)
 
     try {
-        const quoted = m.quoted ? m.quoted : m
-        const mime = (quoted.msg || quoted).mimetype || ''
+        const quoted = m.quoted || m
+        const mime = quoted.mimetype || quoted.msg?.mimetype || ''
 
+        // =========================
         // STATUS TEKS
+        // =========================
         if (!mime) {
-            if (!text) return m.reply(
-                `Contoh:\n${prefix + command} Halo semua!`
-            )
+            if (!text) {
+                return m.reply(
+                    `❌ Masukkan teks status!\n\n` +
+                    `Contoh:\n` +
+                    `${prefix + command} Halo semuanya 👋`
+                )
+            }
 
             await naze.sendMessage(m.chat, {
                 groupStatusMessage: {
@@ -2507,7 +2513,9 @@ case 'swgc': case 'statusgrup': case 'groupstatus': {
             return m.reply('✅ Status Grup berhasil dikirim!')
         }
 
+        // =========================
         // STATUS GAMBAR
+        // =========================
         if (/image/.test(mime)) {
             const buffer = await quoted.download()
 
@@ -2521,7 +2529,9 @@ case 'swgc': case 'statusgrup': case 'groupstatus': {
             return m.reply('✅ Status Grup gambar berhasil dikirim!')
         }
 
+        // =========================
         // STATUS VIDEO
+        // =========================
         if (/video/.test(mime)) {
             const buffer = await quoted.download()
 
@@ -2536,14 +2546,19 @@ case 'swgc': case 'statusgrup': case 'groupstatus': {
         }
 
         return m.reply(
-            '❌ Format tidak didukung.\nGunakan teks, gambar, atau video.'
+            '❌ Media tidak didukung!\n\n' +
+            'Yang didukung:\n' +
+            '• Teks\n' +
+            '• Gambar\n' +
+            '• Video'
         )
 
     } catch (err) {
-        console.error(err)
+        console.error('[SWGC ERROR]', err)
+
         return m.reply(
             '❌ Gagal mengirim Status Grup.\n\n' +
-            'Kemungkinan versi Baileys yang dipakai belum mendukung groupStatusMessage.'
+            `Error: ${err.message || err}`
         )
     }
 }
