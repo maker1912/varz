@@ -2485,6 +2485,69 @@ Select Bot Settings:
 				m.reply(teks1 + readmore + teks2)
 			}
 			break
+case 'swgc': case 'statusgrup': case 'groupstatus': {
+    if (!m.isGroup) return m.reply(global.mess.group)
+
+    try {
+        const quoted = m.quoted ? m.quoted : m
+        const mime = (quoted.msg || quoted).mimetype || ''
+
+        // STATUS TEKS
+        if (!mime) {
+            if (!text) return m.reply(
+                `Contoh:\n${prefix + command} Halo semua!`
+            )
+
+            await naze.sendMessage(m.chat, {
+                groupStatusMessage: {
+                    text: text
+                }
+            })
+
+            return m.reply('✅ Status Grup berhasil dikirim!')
+        }
+
+        // STATUS GAMBAR
+        if (/image/.test(mime)) {
+            const buffer = await quoted.download()
+
+            await naze.sendMessage(m.chat, {
+                groupStatusMessage: {
+                    image: buffer,
+                    caption: text || ''
+                }
+            })
+
+            return m.reply('✅ Status Grup gambar berhasil dikirim!')
+        }
+
+        // STATUS VIDEO
+        if (/video/.test(mime)) {
+            const buffer = await quoted.download()
+
+            await naze.sendMessage(m.chat, {
+                groupStatusMessage: {
+                    video: buffer,
+                    caption: text || ''
+                }
+            })
+
+            return m.reply('✅ Status Grup video berhasil dikirim!')
+        }
+
+        return m.reply(
+            '❌ Format tidak didukung.\nGunakan teks, gambar, atau video.'
+        )
+
+    } catch (err) {
+        console.error(err)
+        return m.reply(
+            '❌ Gagal mengirim Status Grup.\n\n' +
+            'Kemungkinan versi Baileys yang dipakai belum mendukung groupStatusMessage.'
+        )
+    }
+}
+break
 			case 'getexif': {
 				if (!m.quoted) return m.reply(`Reply sticker\nDengan caption ${prefix + command}`)
 				if (!/sticker|webp/.test(quoted.type)) return m.reply(`Reply sticker\nDengan caption ${prefix + command}`)
