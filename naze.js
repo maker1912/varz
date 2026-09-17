@@ -37,6 +37,7 @@ import { ytMp4, ytMp3 } from './lib/scraper.js';
 import templateMenu from './lib/template_menu.js';
 import { toAudio, toPTT, toVideo } from './lib/converter.js';
 import { GroupUpdate, LoadDataBase } from './src/message.js';
+import { mcPing } from './src/mcping.js';
 import { JadiBot, StopJadiBot, ListJadiBot } from './src/jadibot.js';
 import { cmdAdd, cmdAddHit, addExpired, getPosition, getExpired, getStatus, checkStatus, getAllExpired, checkExpired } from './src/database.js';
 import { rdGame, iGame, tGame, gameSlot, gameCasinoSolo, gameSamgongSolo, gameMerampok, gameBegal, daily, buy, setLimit, addLimit, addMoney, setMoney, transfer, Blackjack, SnakeLadder } from './lib/game.js';
